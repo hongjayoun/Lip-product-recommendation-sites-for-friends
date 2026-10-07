@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>립 컬러 테스트</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #e91e63;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #333;
+            font-size: 2em;
+            margin: 20px 0;
+        }
+        .hidden {
+            display: none;
+        }
+        .container {
+            margin: 20px auto;
+            max-width: 600px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .container:hover {
+            transform: scale(1.02);
+        }
+        button {
+            background-color: #e91e63;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        button:hover {
+            background-color: #d81b60;
+            transform: scale(1.05);
+        }
+        img {
+            width: 100px;
+            height: auto;
+            cursor: pointer;
+            margin: 5px;
+            border-radius: 10px;
+            transition: border 0.3s, transform 0.3s;
+        }
+        img:hover {
+            transform: scale(1.1);
+        }
+        .color-option.selected {
+            border: 2px solid #2196f3;
+        }
+        .result {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        #largeImage {
+            display: none;
+            margin-top: 20px;
+            max-width: 100%;
+            border-radius: 10px;
+        }
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+        #overlay img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+    </style>
+</head>
+<body>
+    <div id="intro" class="container">
+        <h1>나에게 어울리는 립 컬러 테스트!</h1>
+        <button id="startButton">스타트</button>
+    </div>
+    <div id="step1" class="container hidden">
+        <h2>1. 피부톤이 뭐야?</h2>
+        <select id="skinTone">
+            <option value="">선택하세요</option>
+            <option value="Fair">Fair</option>
+            <option value="Light">Light</option>
+            <option value="Medium">Medium</option>
+            <option value="Tan">Tan</option>
+            <option value="Deep">Deep</option>
+        </select>
+        <button id="next1">다음</button>
+    </div>
+    <div id="step2" class="container hidden">
+        <h2>2. 선호하는 립 컬러는?</h2>
+        <div>
+            <input type="checkbox" value="Nude"> Nude<br>
+            <input type="checkbox" value="Pink"> Pink<br>
+            <input type="checkbox" value="Red"> Red<br>
+            <input type="checkbox" value="Berry"> Berry<br>
+            <input type="checkbox" value="Plum"> Plum<br>
+            <input type="checkbox" value="Natural Pink"> Natural Pink<br>
+        </div>
+        <button id="next2">다음</button>
+    </div>
+    <div id="step3" class="container hidden">
+        <h2>3. 촉촉한 립이 좋아?</h2>
+        <button id="yesButton">Yes</button>
+        <button id="noButton">No</button>
+    </div>
+    <div id="step4" class="container hidden">
+        <h2>4. 마음에 드는 사진을 선택하시오</h2>
+        <div id="colorImages">
+            <img src="https://i.imgur.com/x0IcIqB.jpeg" alt="JELLY" class="color-option">
+            <img src="https://i.imgur.com/xoJZY3c.jpeg" alt="CORAL" class="color-option">
+            <img src="https://i.imgur.com/qbMIfty.jpeg" alt="BERRY" class="color-option">
+            <img src="https://i.imgur.com/0vCdE74.jpeg" alt="RASPBERRY" class="color-option">
+            <img src="https://i.imgur.com/icjkU1d.jpeg" alt="ROSEWOOD" class="color-option">
+            <img src="https://i.imgur.com/TRNnN9a.jpeg" alt="CERRY" class="color-option">
+            <img src="https://i.imgur.com/LgMw3Cm.jpeg" alt="SOFT NUDE" class="color-option">
+            <img src="https://i.imgur.com/04Z6emF.jpeg" alt="POPPY CORAL" class="color-option">
+            <img src="https://i.imgur.com/KG8ZS9U.jpeg" alt="PINK LILAC" class="color-option">
+            <img src="https://i.imgur.com/oahSGzV.jpeg" alt="GUMMY" class="color-option">
+            <img src="https://i.imgur.com/C8pE0Nx.jpeg" alt="TANGERINE" class="color-option">
+            <img src="https://i.imgur.com/us1pqIl.jpeg" alt="CANDY" class="color-option">
+            <img src="https://i.imgur.com/2oowEjz.jpeg" alt="PINK" class="color-option">
+            <img src="https://i.imgur.com/DlrgPK7.jpeg" alt="SEOUL SCARLET" class="color-option">
+            <img src="https://i.imgur.com/qs9a1DG.jpeg" alt="STRAWBERRY" class="color-option">
+            <img src="https://i.imgur.com/vXaTNiv.jpeg" alt="CORAL PINK" class="color-option">
+            <img src="https://i.imgur.com/iFA3sg9.jpeg" alt="UNIVERSAL" class="color-option">
+        </div>
+        <button id="next3" class="hidden">다음</button>
+    </div>
+    <div id="result" class="container hidden">
+        <h2>나한테 맞는 색은?</h2>
+        <img id="largeImage" src="" alt="Selected Color" />
+        <p>이벤트 당첨! 수고하셨습니다! 결과로 나온 사진은 @urligloss24 로 보내주세요!</p>
+    </div>
+
+    <div id="overlay" class="hidden">
+        <img id="overlayImage" src="" alt="Large View" />
+    </div>
+
+    <script>
+        document.getElementById('startButton').onclick = function() {
+            document.getElementById('intro').classList.add('hidden');
+            document.getElementById('step1').classList.remove('hidden');
+        };
+
+        document.getElementById('next1').onclick = function() {
+            const skinTone = document.getElementById('skinTone').value;
+            if (skinTone) {
+                document.getElementById('step1').classList.add('hidden');
+                document.getElementById('step2').classList.remove('hidden');
+            } else {
+                alert('피부톤을 선택하세요.');
+            }
+        };
+
+        document.getElementById('next2').onclick = function() {
+            document.getElementById('step2').classList.add('hidden');
+            document.getElementById('step3').classList.remove('hidden');
+        };
+
+        document.getElementById('yesButton').onclick = function() {
+            document.getElementById('step3').classList.add('hidden');
+            document.getElementById('step4').classList.remove('hidden');
+        };
+
+        document.getElementById('noButton').onclick = function() {
+            document.getElementById('step3').classList.add('hidden');
+            document.getElementById('step4').classList.remove('hidden');
+        };
+
+        const colorOptions = document.querySelectorAll('.color-option');
+        let selectedImageSrc = '';
+
+        colorOptions.forEach(option => {
+            option.onclick = function() {
+                colorOptions.forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedImageSrc = this.src; // 선택된 이미지의 src 저장
+                document.getElementById('next3').classList.remove('hidden');
+            };
+        });
+
+        document.getElementById('next3').onclick = function() {
+            document.getElementById('step4').classList.add('hidden');
+            document.getElementById('result').classList.remove('hidden');
+            document.getElementById('largeImage').src = selectedImageSrc; // 선택된 이미지를 크게 표시
+            document.getElementById('largeImage').style.display = 'block'; // 이미지 표시
+        };
+
+        // Overlay 기능 추가
+        const overlay = document.getElementById('overlay');
+        const overlayImage = document.getElementById('overlayImage');
+
+        colorOptions.forEach(option => {
+            option.onclick = function() {
+                colorOptions.forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedImageSrc = this.src; // 선택된 이미지의 src 저장
+                document.getElementById('next3').classList.remove('hidden');
+
+                // Overlay에 큰 이미지 표시
+                overlayImage.src = selectedImageSrc;
+                overlay.style.display = 'flex'; // Overlay 표시
+            };
+        });
+
+        overlay.onclick = function() {
+            overlay.style.display = 'none'; // Overlay 숨기기
+        };
+    </script>
+</body> 
